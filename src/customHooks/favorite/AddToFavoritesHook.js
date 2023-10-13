@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToFavorites } from "../../redux/actions/favoriteAction";
-import {
-  getListOfProducts,
-  getSpecificProduct,
-} from "../../redux/actions/productAction";
 import { getLoggedUser } from "../../redux/actions/authAction";
 
 const AddToFavoritesHook = () => {
@@ -16,9 +12,12 @@ const AddToFavoritesHook = () => {
 
   const submit = async (e) => {
     productId = productId === undefined ? e.target.dataset.id : productId;
-
+    setLoading(true);
+    setIsPress(true);
     await dispatch(addToFavorites(productId));
     await dispatch(getLoggedUser());
+    setLoading(false);
+    setIsPress(false);
   };
 
   return [loading, isPress, submit];

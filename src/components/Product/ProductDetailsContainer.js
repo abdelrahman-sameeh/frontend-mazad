@@ -10,10 +10,11 @@ import { Link } from "react-router-dom";
 import GetLoggedUser from "../../customHooks/auth/GetLoggedUser";
 import AddToFavoritesHook from "../../customHooks/favorite/AddToFavoritesHook";
 import DeleteFromFavoritesHook from "../../customHooks/favorite/DeleteFromFavoritesHook";
+import LoadingOnPage from "../utils/LoadingOnPage";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const ProductDetailsContainer = () => {
   const [user] = GetLoggedUser();
-
 
   const [loading, isPress, product, mazadDays, canParticipate] =
     ProductDetailsHook();
@@ -25,10 +26,15 @@ const ProductDetailsContainer = () => {
 
   return (
     <div>
+      {loading && isPress ? <LoadingOnPage /> : null}
       <div className="container mt-3">
         <Row className="gap-2 product-details-grid">
           {/* start product details */}
-          <Col sm="12" md="7" lg="7">
+          <Col className="position-relative" sm="12" md="7" lg="7">
+            {(addToFavLoading && addToFavIsPress) ||
+            (deleteFromFavLoading && deleteFromFavIsPress) ? (
+              <LoadingInComp />
+            ) : null}
             <div className="rounded p-2 bg-light">
               <img
                 src={product.image}

@@ -4,6 +4,8 @@ import { Col, Row } from "react-bootstrap";
 import ProductComp from "./ProductComp";
 import PaginationComponent from "../utils/PaginationComponent";
 import FilterProductsHook from "../../customHooks/product/FilterProductsHook";
+import LoadingOnPage from "../utils/LoadingOnPage";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const ProductsContainer = () => {
   const [loading, isPress, products] = ShowProductsHook();
@@ -22,6 +24,7 @@ const ProductsContainer = () => {
 
   return (
     <div>
+      {loading && isPress ? <LoadingOnPage /> : null}
       <div className="container">
         <div className="d-flex start gap-1 mt-3 border-bottom pb-2">
           <button
@@ -54,12 +57,13 @@ const ProductsContainer = () => {
           </button>
         </div>
         {products && products.length ? (
-          <Row className="row-product-page">
+          <Row className="row-product-page position-relative">
+            {filterLoading && filterIsPress ? <LoadingInComp /> : null}
             {products && products.length
               ? products.map((product) => {
                   return (
                     <Col
-                      style={{ height: "450px", marginTop: '20px' }}
+                      style={{ height: "450px", marginTop: "20px" }}
                       key={product._id}
                       sm="12"
                       md="6"
@@ -72,7 +76,7 @@ const ProductsContainer = () => {
               : null}
           </Row>
         ) : (
-          <h2 className="text-center fw-bold mt-4">  لا يوجد مزادات حاليا </h2>
+          <h2 className="text-center fw-bold mt-4"> لا يوجد مزادات حاليا </h2>
         )}
       </div>
       {pagination && pagination.numberOfPages > 1 && (

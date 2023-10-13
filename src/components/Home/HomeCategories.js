@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import HomeCategoryHook from "../../customHooks/home/HomeCategoryHook";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const HomeCategories = () => {
-  const [categories] = HomeCategoryHook();
+  const [loading, isPress, categories] = HomeCategoryHook();
 
   return (
-    <div className="mt-3">
+    <div className="mt-3 position-relative">
+      {loading && isPress ? <LoadingInComp /> : null}
       <h3 className="fw-bold"> التصنيفات </h3>
       <div
         style={{ overflow: "auto" }}

@@ -4,6 +4,8 @@ import ShowTraderProductsHook from "../../customHooks/trader/ShowTraderProductsH
 import ProductComp from "../Product/ProductComp";
 import { Col, Row } from "react-bootstrap";
 import FilterTraderProductsHook from "../../customHooks/trader/FilterTraderProductHook";
+import LoadingOnPage from "../utils/LoadingOnPage";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const TraderProductsContainer = () => {
   const [loading, isPress, products] = ShowTraderProductsHook();
@@ -22,6 +24,7 @@ const TraderProductsContainer = () => {
 
   return (
     <div>
+      {loading && isPress ? <LoadingOnPage /> : null}
       <div className="container">
         <div className="d-flex start gap-1 mt-3 border-bottom pb-2">
           <button
@@ -55,7 +58,8 @@ const TraderProductsContainer = () => {
         </div>
         {products && products.length ? (
           <>
-            <Row className="row-product-page">
+            <Row className="row-product-page position-relative">
+              {filterLoading && filterIsPress ? <LoadingInComp /> : null}
               {products && products.length
                 ? products.map((product) => {
                     return (

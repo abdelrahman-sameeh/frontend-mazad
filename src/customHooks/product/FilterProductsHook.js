@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getListOfProducts } from "../../redux/actions/productAction";
 
@@ -38,14 +38,20 @@ const FilterProductsHook = () => {
     } else {
       localStorage.removeItem("filterProduct");
     }
-
+    setLoading(true);
+    setIsPress(true);
     await dispatch(getListOfProducts(getQuery()));
+    setLoading(false);
+    setIsPress(false);
   };
 
   const handleChangePagination = async (pageCount) => {
     localStorage.filterProductPage = `page=${pageCount}&`;
-
+    setLoading(true);
+    setIsPress(true);
     await dispatch(getListOfProducts(getQuery()));
+    setLoading(false);
+    setIsPress(false);
   };
 
   const response = useSelector((state) => state.product.getListOfProducts);

@@ -8,12 +8,14 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import ProductComp from "../Product/ProductComp";
 import HomeProductsHook from "../../customHooks/home/HomeProductsHook";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const HomeProductsComp = () => {
   const [loading, isPress, products] = HomeProductsHook();
-
+  
   return (
-    <div className="my-3">
+    <div className="my-3 position-relative container">
+      {loading && isPress ? <LoadingInComp /> : null}
       {products && products.length ? (
         <Swiper
           slidesPerView={1}

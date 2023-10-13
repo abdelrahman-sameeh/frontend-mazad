@@ -3,6 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import SendMazadMessageSocket from "../../customHooks/sockets/SendMazadMessageSocket";
 import GetAllMessagesInSpecificChatHook from "../../customHooks/mazad/GetAllMessagesInSpecificChat";
 import GetProductInMazad from "../../customHooks/product/GetProductInMazadHook";
+import LoadingInComp from "../utils/LoadingInComp";
+import LoadingOnPage from "../utils/LoadingOnPage";
 
 const MazadContainer = () => {
   const myId = localStorage.user ? JSON.parse(localStorage.user)._id : null;
@@ -22,6 +24,7 @@ const MazadContainer = () => {
   return (
     <div>
       <div className="container">
+        {getSpecificLoading && getSpecificIsPress && <LoadingOnPage />}
         <Row className="row-mazad-page mt-3">
           <Col
             className="chat p-2 bg-light rounded position-relative"
@@ -36,7 +39,8 @@ const MazadContainer = () => {
             </div>
 
             {/* messages */}
-            <div className="messages">
+            <div className="messages position-relative">
+              {loading && isPress ? <LoadingInComp /> : null}
               {messages && messages.length
                 ? messages.map((message) => (
                     <div

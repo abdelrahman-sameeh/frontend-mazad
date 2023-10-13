@@ -10,8 +10,7 @@ const myId = localStorage.user ? JSON.parse(localStorage.user)._id : null;
 const SendMazadMessageSocket = (product) => {
   const chatId = useParams().id;
   const [mazadValue, setMazadValue] = useState("");
-  const [isWon, setIsWon] = useState(false);
-  const [ended, setEnded] = useState(false);
+  // const [ended, setEnded] = useState(false);
   const dispatch = useDispatch();
 
   const handleChangeMazadValue = (e) => setMazadValue(e.target.value);
@@ -26,14 +25,20 @@ const SendMazadMessageSocket = (product) => {
     socket.on("receivedMazadValue", async () => {
       await dispatch(getProductInMazad(chatId));
     });
-    socket.on("setWonSuccessfully", async () => {
-      setEnded(true);
-      setIsWon(true);
-    });
   }, []);
 
-  if (new Date(product.endTime) < new Date(Date.now())) {
-    socket.emit("setIsWonInProduct", myId);
+  let isWon = false,
+    ended = false;
+  if (new Date(product.endTime).getTime() < new Date(Date.now()).getTime()) {
+    ended = true;
+    if (
+      product &&
+      product.biggestValue &&
+      product.biggestValue.sender &&
+      product.biggestValue.sender._id === myId
+    ) {
+      isWon = true;
+    }
   }
 
   const handleSendDataToServer = (e) => {
@@ -45,9 +50,10 @@ const SendMazadMessageSocket = (product) => {
         "warn"
       );
     }
-
     setMazadValue("");
     socket.emit("sendMazadValue", data);
+    // set user won in product
+    socket.emit("setIsWonInProduct", myId);
   };
 
   return [

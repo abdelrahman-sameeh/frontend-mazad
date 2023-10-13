@@ -12,8 +12,6 @@ const filter = {
   past: `endTime[lt]=${new Date(Date.now())}&`,
 };
 
-
-
 const getQuery = () => {
   let queryString = `limit=2&user=${JSON.parse(localStorage.user)._id}&`;
 
@@ -40,14 +38,20 @@ const FilterTraderProductsHook = () => {
     } else {
       localStorage.removeItem("filterProduct");
     }
-
+    setLoading(true);
+    setIsPress(true);
     await dispatch(getListOfProducts(getQuery()));
+    setLoading(false);
+    setIsPress(false);
   };
 
   const handleChangePagination = async (pageCount) => {
     localStorage.filterProductPage = `page=${pageCount}&`;
-
+    setLoading(true);
+    setIsPress(true);
     await dispatch(getListOfProducts(getQuery()));
+    setLoading(false);
+    setIsPress(false);
   };
 
   const response = useSelector((state) => state.product.getListOfProducts);

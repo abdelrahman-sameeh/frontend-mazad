@@ -11,6 +11,8 @@ import ProtectRouteComp from "./components/utils/ProtectRouteComp";
 import ProductsPage from "./pages/Product/ProductsPage";
 import TraderProductsPage from "./pages/Trader/TraderProductsPage";
 import MazadPage from "./pages/Mazad/MazadPage";
+import FavoritesPage from "./pages/User/FavoritesPage";
+import MySalesPage from './pages/User/MySalesPage'
 
 function App() {
   const [user, isAdmin, isUser, isTrader, isAuth, notAuth] = ProtectRoute();
@@ -40,9 +42,11 @@ function App() {
           <Route path="/traderProducts" element={<TraderProductsPage />} />
         </Route>
 
-        {/* trader */}
+        {/* user */}
         <Route element={<ProtectRouteComp auth={isUser} />}>
           <Route path="/mazad/:id" element={<MazadPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/mySales" element={<MySalesPage />} />
         </Route>
       </Routes>
       <ToastContainer />

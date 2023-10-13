@@ -6,6 +6,7 @@ import favOff from "../../images/fav-off.png";
 import DeleteFromFavoritesHook from "../../customHooks/favorite/DeleteFromFavoritesHook";
 import AddToFavoritesHook from "../../customHooks/favorite/AddToFavoritesHook";
 import InitialSocket from "../../customHooks/sockets/InitialSocket";
+import LoadingInComp from "../utils/LoadingInComp";
 
 const ProductComp = ({ product }) => {
   const role = localStorage.user ? JSON.parse(localStorage.user).role : null;
@@ -28,7 +29,11 @@ const ProductComp = ({ product }) => {
   const [handleGoToMazadChat] = InitialSocket();
 
   return (
-    <div className="bg-light rounded p-2 d-flex flex-column justify-content-between h-100">
+    <div className="bg-light position-relative rounded p-2 d-flex flex-column justify-content-between h-100">
+      {(addToFavLoading && addToFavIsPress) ||
+      (deleteFromFavLoading && deleteFromFavIsPress) ? (
+        <LoadingInComp />
+      ) : null}
       {/* image */}
       <div className="image h-50">
         <img

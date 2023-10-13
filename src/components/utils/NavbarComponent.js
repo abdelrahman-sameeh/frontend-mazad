@@ -7,7 +7,7 @@ const NavbarComponent = () => {
   const [user, isAdmin, isUser, isTrader, isAuth, notAuth] = ProtectRoute();
     
   return (
-    <div className="bg-light p-2 navbar">
+    <div className="bg-light p-2 navbar border-bottom">
       <div
         style={{ flexWrap: "nowrap" }}
         className="container d-flex align-items-center justify-content-between gap-3"
@@ -28,7 +28,7 @@ const NavbarComponent = () => {
           {/* user */}
           {isUser && (
             <>
-              <Link to="/myPurchases">مشترياتى</Link>
+              <Link to="/mySales">مشترياتى</Link>
               <Link to="/favorites">المفضلة</Link>
             </>
           )}

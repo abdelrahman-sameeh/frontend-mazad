@@ -64,4 +64,11 @@ socket.on("receivedMazadValue", (message) => {
   }
 });
 
-
+document.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("loading-page") ||
+    e.target.classList.contains("loading-comp")
+  ) {
+    e.target.classList.add('d-none')
+  }
+});
