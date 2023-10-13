@@ -16,10 +16,9 @@ const CompletePayHook = (product) => {
   };
 
   const response = useSelector((state) => state.pay.completePay);
-  console.log(response);
 
   if (response && response.status === 200) {
-    window.open(`https://master--mazad.netlify.app/api/v1/orders`);
+    window.open(response.data.session.url);
   }
 
   return [loading, isPress, handleCompletePay];

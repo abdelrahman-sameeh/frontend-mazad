@@ -1,3 +1,4 @@
+import { useGetData } from "../../hooks/useGetData";
 import { GET_STRIPE_SESSION_TO_PAY } from "../type";
 
 export const completePayMethod = (productId) => async (dispatch) => {

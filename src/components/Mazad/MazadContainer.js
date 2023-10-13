@@ -22,7 +22,7 @@ const MazadContainer = () => {
     handleSendDataToServer,
   ] = SendMazadMessageSocket(product);
 
-  const [payLoading, payIsPress, handleCompletePay] =CompletePayHook(product)
+  const [payLoading, payIsPress, handleCompletePay] = CompletePayHook(product);
 
   return (
     <div>
@@ -133,7 +133,10 @@ const MazadContainer = () => {
                 product.biggestValue &&
                 product.biggestValue.sender &&
                 product.biggestValue.sender._id === myId ? (
-                  <button onClick={handleCompletePay} className="btn main-btn fw-bold w-100 mt-2">
+                  <button
+                    onClick={handleCompletePay}
+                    className="btn main-btn fw-bold w-100 mt-2"
+                  >
                     اتمام الشراء{" "}
                   </button>
                 ) : null}
