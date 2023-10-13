@@ -5,6 +5,7 @@ import { productReducer } from "./productReducer";
 import { favoriteReducer } from "./favoriteReducer";
 import { chatReducer } from "./chatReducer";
 import { salesReducer } from "./mySalesReducer";
+import { payReducer } from "./payReducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
   product: productReducer,
   favorite: favoriteReducer,
   chat: chatReducer,
-  sales: salesReducer
+  sales: salesReducer,
+  pay: payReducer
 })

@@ -5,6 +5,7 @@ import GetAllMessagesInSpecificChatHook from "../../customHooks/mazad/GetAllMess
 import GetProductInMazad from "../../customHooks/product/GetProductInMazadHook";
 import LoadingInComp from "../utils/LoadingInComp";
 import LoadingOnPage from "../utils/LoadingOnPage";
+import CompletePayHook from "../../customHooks/mazad/CompletePayHook";
 
 const MazadContainer = () => {
   const myId = localStorage.user ? JSON.parse(localStorage.user)._id : null;
@@ -20,6 +21,8 @@ const MazadContainer = () => {
     handleChangeMazadValue,
     handleSendDataToServer,
   ] = SendMazadMessageSocket(product);
+
+  const [payLoading, payIsPress, handleCompletePay] =CompletePayHook(product)
 
   return (
     <div>
@@ -130,7 +133,7 @@ const MazadContainer = () => {
                 product.biggestValue &&
                 product.biggestValue.sender &&
                 product.biggestValue.sender._id === myId ? (
-                  <button className="btn main-btn fw-bold w-100 mt-2">
+                  <button onClick={handleCompletePay} className="btn main-btn fw-bold w-100 mt-2">
                     اتمام الشراء{" "}
                   </button>
                 ) : null}
