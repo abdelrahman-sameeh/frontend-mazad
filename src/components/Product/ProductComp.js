@@ -106,6 +106,7 @@ const ProductComp = ({ product }) => {
             to={`/mazad/${product.chatId}`}
             onClick={() => {
               handleGoToMazadChat(product.chatId);
+              localStorage.productId = product._id
             }}
             className="btn main-btn fw-bold"
           >

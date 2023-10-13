@@ -92,7 +92,7 @@ const AddProductHook = () => {
   const handleClearSelected = (e) => {
     setSelectedImage(null);
     setImage(uploadImage);
-  };
+  }; 
 
   const submit = async (e) => {
     e.preventDefault();

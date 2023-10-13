@@ -24,13 +24,13 @@ const HomeProductsComp = () => {
             clickable: true,
           }}
           breakpoints={{
-            640: {
+            776: {
               slidesPerView: 2,
-              spaceBetween: 15,
+              spaceBetween: 10,
             },
-            800: {
+            991: {
               slidesPerView: 3,
-              spaceBetween: 15,
+              spaceBetween: 10,
             },
           }}
           modules={[Pagination]}

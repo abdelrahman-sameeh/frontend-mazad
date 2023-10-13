@@ -18,6 +18,7 @@ const HomeCategoryHook = () => {
   }, []);
 
   const response = useSelector((state) => state.category.getListOfCategory);
+  
   let categories = [];
   if (response && response.status == 200) {
     categories = response.data.data;

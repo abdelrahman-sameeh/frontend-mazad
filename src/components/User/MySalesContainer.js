@@ -1,6 +1,5 @@
 import React from "react";
 import LoadingOnPage from "../utils/LoadingOnPage";
-import ShowFavoritesHook from "../../customHooks/favorite/ShowFavoritesHook";
 import { Col, Row } from "react-bootstrap";
 import ProductComp from "../Product/ProductComp";
 import GetLoggedUserSales from "../../customHooks/sales/GetLoggedUserSales";

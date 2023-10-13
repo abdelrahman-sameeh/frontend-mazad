@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { socket } from "./InitialSocket";
 import { useParams } from "react-router-dom";
 import { getProductInMazad } from "../../redux/actions/productAction";
@@ -10,9 +10,8 @@ const myId = localStorage.user ? JSON.parse(localStorage.user)._id : null;
 const SendMazadMessageSocket = (product) => {
   const chatId = useParams().id;
   const [mazadValue, setMazadValue] = useState("");
-  // const [ended, setEnded] = useState(false);
   const dispatch = useDispatch();
-
+  const sendBtn = useRef('')
   const handleChangeMazadValue = (e) => setMazadValue(e.target.value);
 
   const data = {
@@ -51,6 +50,8 @@ const SendMazadMessageSocket = (product) => {
       );
     }
     setMazadValue("");
+    sendBtn.current.innerHTML += `<div class="my-spinner spinner-border text-light" role="status"></div>`
+    
     socket.emit("sendMazadValue", data);
     // set user won in product
     socket.emit("setIsWonInProduct", myId);
@@ -58,6 +59,7 @@ const SendMazadMessageSocket = (product) => {
 
   return [
     mazadValue,
+    sendBtn,
     ended,
     isWon,
     handleChangeMazadValue,

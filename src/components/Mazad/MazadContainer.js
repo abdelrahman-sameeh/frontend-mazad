@@ -1,11 +1,12 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import SendMazadMessageSocket from "../../customHooks/sockets/SendMazadMessageSocket";
 import GetAllMessagesInSpecificChatHook from "../../customHooks/mazad/GetAllMessagesInSpecificChat";
 import GetProductInMazad from "../../customHooks/product/GetProductInMazadHook";
 import LoadingInComp from "../utils/LoadingInComp";
 import LoadingOnPage from "../utils/LoadingOnPage";
 import CompletePayHook from "../../customHooks/mazad/CompletePayHook";
+import GetOneOrderHook from "../../customHooks/mazad/GetOneOrderHook";
 
 const MazadContainer = () => {
   const myId = localStorage.user ? JSON.parse(localStorage.user)._id : null;
@@ -16,6 +17,7 @@ const MazadContainer = () => {
 
   const [
     mazadValue,
+    sendBtn,
     ended,
     isWon,
     handleChangeMazadValue,
@@ -23,6 +25,8 @@ const MazadContainer = () => {
   ] = SendMazadMessageSocket(product);
 
   const [payLoading, payIsPress, handleCompletePay] = CompletePayHook(product);
+
+  const [isPaid] = GetOneOrderHook(product);
 
   return (
     <div>
@@ -74,8 +78,9 @@ const MazadContainer = () => {
                 />
                 <button
                   onClick={handleSendDataToServer}
+                  ref= {sendBtn}
                   id="sendMazad"
-                  className="btn main-btn sendMazad"
+                  className="btn main-btn sendMazad d-flex center gap-2"
                 >
                   {" "}
                   مزايدة{" "}
@@ -132,13 +137,20 @@ const MazadContainer = () => {
                 {isWon &&
                 product.biggestValue &&
                 product.biggestValue.sender &&
-                product.biggestValue.sender._id === myId ? (
+                product.biggestValue.sender._id === myId &&
+                !isPaid ? (
                   <button
                     onClick={handleCompletePay}
-                    className="btn main-btn fw-bold w-100 mt-2"
+                    className="btn main-btn fw-bold w-100 mt-2 d-flex center gap-2"
                   >
                     اتمام الشراء{" "}
+                    {payLoading && payIsPress ? (
+                      <Spinner variant="light" animation="border" />
+                    ) : null}
                   </button>
+                ) : null}
+                {isPaid ? (
+                  <div className="alert alert-success text-center"> تم البيع </div>
                 ) : null}
               </>
             ) : null}

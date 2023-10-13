@@ -43,7 +43,7 @@ if (window.location.pathname.startsWith("/mazad/")) {
   setTimeout(() => {
     const messagesElm = document.querySelector(".messages");
     messagesElm.scrollTo({ top: messagesElm.scrollHeight, behavior: "smooth" });
-  }, 500);
+  }, 1000);
 }
 
 socket.on("receivedMazadValue", (message) => {
@@ -59,6 +59,8 @@ socket.on("receivedMazadValue", (message) => {
   </div>
   `;
 
+  document.querySelector(".my-spinner").remove();
+
   if (window.location.pathname.startsWith("/mazad/")) {
     messagesElm.scrollTo({ top: messagesElm.scrollHeight, behavior: "smooth" });
   }
@@ -69,6 +71,6 @@ document.addEventListener("click", (e) => {
     e.target.classList.contains("loading-page") ||
     e.target.classList.contains("loading-comp")
   ) {
-    e.target.classList.add('d-none')
+    e.target.classList.add("d-none");
   }
 });

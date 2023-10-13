@@ -5,7 +5,7 @@ import HomeCategoryHook from "../../customHooks/home/HomeCategoryHook";
 import { Spinner } from "react-bootstrap";
 
 const CreateProductContainer = () => {
-  const [categories] = HomeCategoryHook();
+  const [catLoading, catIsPress, categories] = HomeCategoryHook();
 
   const [
     loading,
@@ -194,7 +194,7 @@ const CreateProductContainer = () => {
               <Spinner variant="light" animation="border" />
             ) : null}
           </button>
-        </form> 
+        </form>
       </div>
     </div>
   );
