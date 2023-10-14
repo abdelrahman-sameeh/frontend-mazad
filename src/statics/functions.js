@@ -58,8 +58,9 @@ socket.on("receivedMazadValue", (message) => {
     <div class="content"> ${message.content} </div>
   </div>
   `;
-
-  document.querySelector(".my-spinner").remove();
+  if (document.querySelector(".my-spinner")){
+    document.querySelector(".my-spinner").remove();
+  }
 
   if (window.location.pathname.startsWith("/mazad/")) {
     messagesElm.scrollTo({ top: messagesElm.scrollHeight, behavior: "smooth" });

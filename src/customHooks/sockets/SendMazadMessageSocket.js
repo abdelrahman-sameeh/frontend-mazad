@@ -22,9 +22,10 @@ const SendMazadMessageSocket = (product) => {
 
   useEffect(() => {
     socket.on("receivedMazadValue", async () => {
+      console.log('test');
       await dispatch(getProductInMazad(chatId));
     });
-  }, []);
+  }, []); 
 
   let isWon = false,
     ended = false;
